@@ -1,12 +1,13 @@
 import { generateClamp } from '@/function/generate-clamp';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Footer: React.FC = () => {
   return (
     <footer>
       <div className='custom-container flex h-30 items-center justify-between gap-4 py-6 max-md:flex-col max-md:items-start md:py-2'>
-        <div className='flex items-center gap-1 md:gap-2'>
+        <Link href='/' className='flex items-center gap-1 md:gap-2'>
           <Image
             src='/icons/icon-pokemon.svg'
             alt='logo'
@@ -24,7 +25,7 @@ const Footer: React.FC = () => {
           >
             Pokedex
           </span>
-        </div>
+        </Link>
         <p
           className='font-regular text-neutral-600'
           style={{

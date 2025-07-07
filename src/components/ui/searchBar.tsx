@@ -1,12 +1,18 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { generateClamp } from '@/function/generate-clamp';
 import TypingPlaceholderInput from './typingPlaceholderInput';
+import { cn } from '@/lib/utils';
 
-const SearchBar = () => {
+type SearchBarProps = {
+  classname?: string;
+  style?: React.CSSProperties;
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ classname, style }) => {
   const [query, setQuery] = useState('');
   const pathname = usePathname();
   const router = useRouter();
@@ -33,8 +39,12 @@ const SearchBar = () => {
 
   return (
     <div
-      className='flex-between focus-within:border-primary-300 w-full gap-1.5 rounded-full bg-neutral-100 focus-within:border md:w-129.5'
+      className={cn(
+        'flex-between focus-within:border-primary-300 w-full gap-1.5 rounded-full bg-neutral-100 focus-within:border md:w-129.5',
+        classname
+      )}
       style={{
+        ...style,
         paddingInline: generateClamp(16, 24, 1248),
         height: generateClamp(48, 56, 1248),
       }}
