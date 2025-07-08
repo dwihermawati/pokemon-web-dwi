@@ -5,7 +5,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer>
+    <footer className='border-t border-t-neutral-300'>
       <div className='custom-container flex h-30 items-center justify-between gap-4 py-6 max-md:flex-col max-md:items-start md:py-2'>
         <Link href='/' className='flex items-center gap-1 md:gap-2'>
           <Image

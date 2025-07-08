@@ -1,27 +1,21 @@
+import HeroBgDecorations from '@/components/hero/HeroBgDecorations';
 import SearchBar from '@/components/ui/searchBar';
 import { generateClamp } from '@/function/generate-clamp';
-import { generateClampInverse } from '@/function/generate-clamp-inverse';
 import Image from 'next/image';
 import React from 'react';
 
 const Hero: React.FC = () => {
   return (
     <section
-      className='bg-primary-300 flex-center cloud-decoration-hero relative w-full'
-      // style={{ minHeight: generateClamp(520, 677, 1440) }}
+      className='bg-primary-300 relative flex w-full justify-center'
+      style={{ height: generateClamp(520, 677, 1440) }}
     >
-      {/* <div
-        className="pointer-events-none absolute bottom-0 left-1/2 z-10 h-[132px] w-full -translate-x-1/2 transform border border-red-500 bg-[url('/images/cloud-hero-decoration.png')] bg-contain bg-repeat-x"
-        style={{
-          top: generateClamp(441, 555, 1440),
-          height: generateClamp(82, 132, 1440),
-        }}
-      /> */}
+      <HeroBgDecorations />
       <div
-        className='flex-center w-full flex-col max-sm:mx-4'
+        className='flex-center relative z-20 h-full w-full flex-col max-sm:mx-4'
         style={{
-          marginTop: generateClamp(128, 140, 1440),
-          marginBottom: generateClamp(120, 210, 1440),
+          paddingTop: generateClamp(128, 140, 1440),
+          paddingBottom: generateClamp(120, 210, 1440),
         }}
       >
         <div
