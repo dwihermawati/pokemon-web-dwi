@@ -1,4 +1,4 @@
-const capitalize = (name: string): string => {
+export const capitalize = (name: string): string => {
   return name
     .trim()
     .split(' ')

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'Pokedex',
@@ -22,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={clsx(poppins.variable, 'antialiased')}>{children}</body>
+      <body className={clsx(poppins.variable, 'antialiased')}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
