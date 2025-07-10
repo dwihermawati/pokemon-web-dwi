@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   title: 'Pokedex',
@@ -24,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={clsx(poppins.variable, 'antialiased')}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children} <ToastContainer position='top-center' autoClose={3000} />
+        </Providers>
       </body>
     </html>
   );

@@ -29,6 +29,13 @@ export type PokemonListResponse = {
   results: PokemonListItem[];
 };
 
+export type PokemonCardData = {
+  id: number;
+  name: string;
+  image: string;
+  types: DetailTypePokemon[];
+};
+
 export type PokemonDetail = {
   id: number;
   name: string;
