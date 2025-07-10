@@ -76,9 +76,6 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           <img
             src={pokeImage}
             alt={pokeName}
-            // width={0}
-            // height={0}
-            // sizes='100vw'
             className='size-full cursor-pointer object-contain hover:scale-105 active:scale-95'
             onClick={() => setDialogOpen(true)}
           />

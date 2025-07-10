@@ -1,11 +1,16 @@
 import { generateClamp } from '@/function/generate-clamp';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const Footer: React.FC = () => {
+type FooterProps = {
+  classname?: string;
+};
+
+const Footer: React.FC<FooterProps> = ({ classname }) => {
   return (
-    <footer className='border-t border-t-neutral-300'>
+    <footer className={cn('border-t border-t-neutral-300', classname)}>
       <div className='custom-container flex h-30 items-center justify-between gap-4 py-6 max-md:flex-col max-md:items-start md:py-2'>
         <Link href='/' className='flex items-center gap-1 md:gap-2'>
           <Image
