@@ -7,7 +7,7 @@ const HeroBgDecorations = () => {
     <>
       <div className='absolute inset-0 z-0 opacity-60'>
         <div
-          className='h-full w-full bg-contain'
+          className='animate-twinkle h-full w-full bg-contain'
           style={{
             backgroundImage: 'url(/images/pattern-hero-decoration.png)',
             backgroundRepeat: 'repeat',
@@ -23,7 +23,7 @@ const HeroBgDecorations = () => {
       />
       <div className='absolute z-10 h-full w-full max-w-360 overflow-hidden'>
         <div
-          className='absolute aspect-square transform bg-contain bg-no-repeat'
+          className='animate-breathe absolute aspect-square transform bg-contain bg-no-repeat'
           style={{
             width: generateClamp(161, 328, 1440),
             backgroundImage: "url('/images/charizard-hero-decoration.png')",
@@ -32,13 +32,12 @@ const HeroBgDecorations = () => {
           }}
         />
         <div
-          className='absolute aspect-square transform bg-contain bg-no-repeat'
+          className='animate-breathe absolute aspect-square transform bg-contain bg-no-repeat'
           style={{
             width: generateClamp(147, 278, 1440),
             backgroundImage: "url('/images/pikachu-hero-decoration.png')",
-            left: generateClamp(259, 1089, 1440),
+            left: generateClamp(199, 1089, 1440),
             top: generateClamp(383, 391, 1440),
-            // bottom: generateClampInverse(-24, -27, 1440),
           }}
         />
       </div>

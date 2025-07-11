@@ -7,7 +7,7 @@ import { PokemonDetail } from '@/types/pokemon';
 import PokemonCard from './pokemonCard';
 import { PacmanLoader } from 'react-spinners';
 
-interface PokemonCardListProps {
+type PokemonCardListProps = {
   pokemons: PokemonDetail[];
   variant?: 'default' | 'evolution';
   label?: string;
@@ -16,7 +16,7 @@ interface PokemonCardListProps {
   onLoadMore?: () => void;
   hasNextPage?: boolean;
   isLoadingMore?: boolean;
-}
+};
 
 const PokemonCardList: React.FC<PokemonCardListProps> = ({
   pokemons,
@@ -54,7 +54,7 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
           'grid gap-4',
           variant === 'default'
             ? 'grid-cols-[repeat(auto-fit,minmax(288px,1fr))]'
-            : 'grid-cols-[repeat(auto-fit,minmax(192px,1fr))] md:gap-5'
+            : 'sc670:grid-cols-[repeat(auto-fill,minmax(192px,192px))] grid-cols-1 md:gap-5'
         )}
       >
         {pokemons.map((pokemon) => (

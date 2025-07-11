@@ -15,11 +15,15 @@ import { RootState } from '@/redux/store';
 import { PokemonCardData } from '@/types/pokemon';
 import { cn } from '@/lib/utils';
 
-interface FavoriteButtonProps {
+type FavoriteButtonProps = {
   pokemon: PokemonCardData;
-}
+  className?: string;
+};
 
-export const FavoriteButton: React.FC<FavoriteButtonProps> = ({ pokemon }) => {
+export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
+  pokemon,
+  className,
+}) => {
   const dispatch = useAppDispatch();
   const favorites = useSelector((state: RootState) => state.favorite.items);
   const isFavorited = favorites.some((item) => item.id === pokemon.id);
@@ -51,7 +55,8 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({ pokemon }) => {
         isFavorited
           ? 'bg-accent-yellow hover:opacity-70'
           : 'bg-neutral-400 hover:text-black hover:opacity-70',
-        'hover:scale-105 active:scale-95'
+        'hover:scale-105 active:scale-95',
+        className
       )}
       title={isFavorited ? 'Remove from favorite' : 'Add to favorite'}
     >

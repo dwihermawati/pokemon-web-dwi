@@ -10,9 +10,9 @@ const Badge: React.FC<BadgeProps> = ({ label, badge }) => {
   return (
     <div className='flex flex-col'>
       {label && (
-        <span className='text-lg-semibold md:text-xl-semibold mb-1 text-neutral-900 md:mb-2.5'>
+        <p className='text-lg-semibold md:text-xl-semibold mb-1 text-neutral-900 md:mb-2.5'>
           {label}
-        </span>
+        </p>
       )}
       <div className='flex gap-3'>
         {badge.map((item) => (

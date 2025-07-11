@@ -1,3 +1,4 @@
+import { color } from 'motion/react';
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -44,8 +45,34 @@ const customTextPlugin = plugin(({ addUtilities }) => {
 export default {
   theme: {
     extend: {
-      animation: {},
-      keyframes: {},
+      animation: {
+        breathe: 'breathe 5s ease-in-out infinite',
+        twinkle: 'twinkle 3s infinite ease-in-out;',
+        pulse: 'pulse 3s ease-in-out infinite',
+      },
+      keyframes: {
+        breathe: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-0.5rem)' },
+        },
+        twinkle: {
+          '0%, 100%': {
+            opacity: 0.6,
+            filter: 'brightness(1)',
+          },
+          '50%': {
+            opacity: 1,
+            filter: 'brightness(0.9)',
+          },
+        },
+        pulse: {
+          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.03)', opacity: '0.95' },
+        },
+      },
+      screens: {
+        sc670: '670px',
+      },
     },
   },
   plugins: [customTextPlugin],

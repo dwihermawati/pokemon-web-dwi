@@ -29,7 +29,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/pokemon/${pokeName}`);
+    router.push(`/pokemon/${pokeName}`, { scroll: false });
   };
   return (
     <>
@@ -48,7 +48,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         }
       >
         {/* Action Button */}
-        <div className='absolute right-5 bottom-5 z-10 flex flex-col gap-3'>
+        <div
+          className={cn(
+            'absolute right-5 bottom-5 z-10 flex gap-3',
+            variant === 'evolution'
+              ? 'max-sc670:flex-col sc670:right-3 sc670:bottom-13 flex'
+              : 'flex-col'
+          )}
+        >
           <FavoriteButton
             pokemon={{
               id: pokeId,
@@ -56,8 +63,12 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
               image: pokeImage,
               types: pokeType?.map((type) => ({ type: { name: type } })) || [],
             }}
+            className={cn(variant === 'evolution' && 'sc670:size-7')}
           />
-          <ViewDetailButton name={pokeName} />
+          <ViewDetailButton
+            name={pokeName}
+            className={cn(variant === 'evolution' && 'sc670:size-7')}
+          />
         </div>
 
         {/* Card Image */}
@@ -110,11 +121,11 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             {pokeType && <Badge badge={pokeType} />}
           </div>
         ) : (
-          <div onClick={handleClick} className='group'>
+          <div onClick={handleClick}>
             <p className='text-md-regular text-neutral-500'>
               {pokeId.toString().padStart(3, '0')}
             </p>
-            <p className='text-xl-semibold group-hover:text-primary-400 text-neutral-900 transition-all duration-300 ease-in-out'>
+            <p className='text-xl-semibold hover:text-primary-400 cursor-pointer text-neutral-900 transition-all duration-300 ease-in-out'>
               {capitalize(pokeName)}
             </p>
           </div>

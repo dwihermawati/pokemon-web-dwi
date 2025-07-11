@@ -31,6 +31,7 @@ const Hero: React.FC = () => {
             height={0}
             sizes='100vw'
             style={{ height: generateClamp(38, 64, 1440), width: 'auto' }}
+            className='animate-pulse'
           />
           <h1
             className='md:display-2xl-bold display-sm-bold text-center text-neutral-900'

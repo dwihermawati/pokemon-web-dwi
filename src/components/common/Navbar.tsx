@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import SearchBar from '../ui/searchBar';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type NavbarProps = {
   variant?: 'default' | 'secondary';
@@ -25,10 +26,17 @@ const Navbar: React.FC<NavbarProps> = ({ variant = 'default' }) => {
   );
 
   const [scrolled, setScrolled] = useState(false);
-
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 0);
   });
+
+  const pathname = usePathname();
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <motion.header
@@ -48,9 +56,9 @@ const Navbar: React.FC<NavbarProps> = ({ variant = 'default' }) => {
       >
         <Link
           href='/'
-          className='flex items-center gap-1 md:gap-2'
+          className='flex items-center gap-1 hover:-translate-y-0.5 md:gap-2'
           scroll={false}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={handleLogoClick}
         >
           <Image
             src='/icons/icon-pokemon.svg'
