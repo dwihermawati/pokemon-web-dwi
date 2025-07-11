@@ -46,7 +46,12 @@ const Navbar: React.FC<NavbarProps> = ({ variant = 'default' }) => {
         )}
         style={{ height: generateClamp(64, 80, 1248) }}
       >
-        <Link href='/' className='flex items-center gap-1 md:gap-2'>
+        <Link
+          href='/'
+          className='flex items-center gap-1 md:gap-2'
+          scroll={false}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <Image
             src='/icons/icon-pokemon.svg'
             alt='logo'

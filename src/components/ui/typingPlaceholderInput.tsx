@@ -51,14 +51,14 @@ const TypingPlaceholderInput = ({
   };
 
   useEffect(() => {
-    if (!isFocused) {
+    if (!isFocused && !props.value) {
       typingTimeout.current = setTimeout(typeEffect, 500);
     }
 
     return () => {
       if (typingTimeout.current) clearTimeout(typingTimeout.current);
     };
-  }, [isFocused]);
+  }, [isFocused, props.value]);
 
   useEffect(() => {
     blinkInterval.current = setInterval(() => {
@@ -72,7 +72,7 @@ const TypingPlaceholderInput = ({
 
   return (
     <div className='relative w-full'>
-      {!isFocused && (
+      {!isFocused && !props.value && (
         <span className='text-sm-regular md:text-md-regular pointer-events-none absolute top-1/2 left-0 -translate-y-1/2 text-neutral-500 select-none'>
           {placeholder}
           <span
@@ -98,9 +98,11 @@ const TypingPlaceholderInput = ({
         }}
         onBlur={() => {
           setIsFocused(false);
-          phaseRef.current = 'typing';
-          charIndexRef.current = 0;
-          typingTimeout.current = setTimeout(typeEffect, 500);
+          if (!props.value) {
+            phaseRef.current = 'typing';
+            charIndexRef.current = 0;
+            typingTimeout.current = setTimeout(typeEffect, 500);
+          }
         }}
       />
     </div>

@@ -53,6 +53,7 @@ const Hero: React.FC = () => {
           </p>
         </div>
         <SearchBar
+          classname='focus-within:border-secondary-300'
           style={{
             marginTop: generateClamp(15, 30, 1440),
             maxWidth: generateClamp(361, 518, 1440),

@@ -48,7 +48,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         }
       >
         {/* Action Button */}
-        <div className='absolute top-3 right-3 flex flex-col gap-3'>
+        <div className='absolute right-5 bottom-5 z-10 flex flex-col gap-3'>
           <FavoriteButton
             pokemon={{
               id: pokeId,
@@ -76,7 +76,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           <img
             src={pokeImage}
             alt={pokeName}
-            className='size-full cursor-pointer object-contain hover:scale-105 active:scale-95'
+            className='size-full cursor-pointer object-contain hover:scale-103 hover:brightness-105 active:scale-95'
             onClick={() => setDialogOpen(true)}
           />
         </div>
@@ -126,12 +126,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           <div className='flex-between'>
             <DialogTitle>{capitalize(pokeName)}</DialogTitle>
             <DialogClose>
-              <XIcon className='text-accent-yellow size-9 cursor-pointer opacity-100 transition-opacity hover:opacity-70' />
+              <XIcon className='text-accent-yellow size-9 cursor-pointer opacity-100 transition-opacity hover:opacity-70 max-md:size-8' />
             </DialogClose>
           </div>
-          <div className='flex-center relative aspect-square h-auto max-w-200'>
-            <img src={pokeImage} alt={pokeName} className='object-contain' />
-          </div>
+          <img
+            src={pokeImage}
+            alt={pokeName}
+            className='mx-auto aspect-square h-full object-contain'
+          />
         </DialogContent>
       </Dialog>
     </>

@@ -1,3 +1,5 @@
+'use client';
+
 import { generateClamp } from '@/function/generate-clamp';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -12,7 +14,12 @@ const Footer: React.FC<FooterProps> = ({ classname }) => {
   return (
     <footer className={cn('border-t border-t-neutral-300', classname)}>
       <div className='custom-container flex h-30 items-center justify-between gap-4 py-6 max-md:flex-col max-md:items-start md:py-2'>
-        <Link href='/' className='flex items-center gap-1 md:gap-2'>
+        <Link
+          href='/'
+          className='flex items-center gap-1 md:gap-2'
+          scroll={false}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <Image
             src='/icons/icon-pokemon.svg'
             alt='logo'

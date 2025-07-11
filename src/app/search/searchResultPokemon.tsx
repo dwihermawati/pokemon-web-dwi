@@ -40,6 +40,7 @@ const SearchResultPokemon = () => {
                   alt='not found pokemon'
                   width={0}
                   height={0}
+                  sizes='100vw'
                   style={{
                     width: generateClamp(92, 130, 1248),
                   }}

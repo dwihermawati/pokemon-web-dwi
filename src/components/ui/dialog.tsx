@@ -66,7 +66,7 @@ function DialogContent({
         )}
         {...props}
       >
-        <div className='size-full rounded-xl border border-neutral-600 bg-transparent p-4 shadow-2xl md:rounded-2xl md:px-8'>
+        <div className='relative size-full rounded-xl border border-neutral-600 bg-transparent p-4 pb-8 shadow-2xl md:rounded-2xl'>
           {children}
         </div>
       </DialogPrimitive.Content>
@@ -104,7 +104,10 @@ function DialogTitle({
   return (
     <DialogPrimitive.Title
       data-slot='dialog-title'
-      className={cn('text-accent-yellow display-sm-bold', className)}
+      className={cn(
+        'text-accent-yellow display-sm-bold max-md:display-xs-bold',
+        className
+      )}
       {...props}
     />
   );

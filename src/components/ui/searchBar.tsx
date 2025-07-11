@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { generateClamp } from '@/function/generate-clamp';
@@ -13,20 +13,26 @@ type SearchBarProps = {
 };
 
 const SearchBar: React.FC<SearchBarProps> = ({ classname, style }) => {
-  const [query, setQuery] = useState('');
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
+
+  const urlQuery = searchParams.get('query') || '';
+
+  const [query, setQuery] = useState(urlQuery);
 
   useEffect(() => {
     if (pathname !== '/search') {
-      setQuery('');
+      setQuery(urlQuery);
     }
-  }, [pathname]);
+  }, [pathname, urlQuery]);
 
   const handleSubmit = () => {
     const trimmed = query.trim();
     if (trimmed.length > 0) {
-      router.push(`/search?query=${encodeURIComponent(trimmed)}`);
+      router.push(`/search?query=${encodeURIComponent(trimmed)}`, {
+        scroll: false,
+      });
     }
   };
 
