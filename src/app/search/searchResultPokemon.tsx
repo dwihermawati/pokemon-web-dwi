@@ -1,13 +1,15 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { useSearchPokemon } from '@/hooks/useSearchPokemon';
-import { PacmanLoader } from 'react-spinners';
 import Image from 'next/image';
-import PokemonCard from '@/components/pokemon/pokemonCard';
-import { generateClamp } from '@/function/generate-clamp';
-import { capitalize } from '@/lib/formatStatName';
+import { useSearchParams } from 'next/navigation';
+import { PacmanLoader } from 'react-spinners';
+
 import Footer from '@/components/common/Footer';
+import PokemonCard from '@/components/pokemon/pokemonCard';
+
+import { generateClamp } from '@/function/generate-clamp';
+import { useSearchPokemon } from '@/hooks/useSearchPokemon';
+import { capitalize } from '@/lib/formatStatName';
 
 const SearchResultPokemon = () => {
   const searchParams = useSearchParams();

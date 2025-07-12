@@ -1,5 +1,6 @@
-import { PokemonCardData } from '@/types/pokemon';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { PokemonCardData } from '@/types/pokemon';
 
 type FavoritePokemonState = {
   items: PokemonCardData[];

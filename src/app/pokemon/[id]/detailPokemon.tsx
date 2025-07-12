@@ -1,14 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
+import React from 'react';
+import { PacmanLoader } from 'react-spinners';
+
 import PokemonCardList from '@/components/pokemon/pokemonCardList';
 import SizeDisplay from '@/components/pokemon/sizeDisplay';
 import StatsSection from '@/components/pokemon/statBar';
 import Badge from '@/components/ui/badge';
+
 import { generateClamp } from '@/function/generate-clamp';
 import useEvolutionPokemon from '@/hooks/useEvolutionPokemon';
 import { capitalize } from '@/lib/formatStatName';
 import { PokemonDetail } from '@/types/pokemon';
-import Image from 'next/image';
-import React from 'react';
-import { PacmanLoader } from 'react-spinners';
 
 type DetailPokemonSectionProps = {
   pokemon: PokemonDetail;
@@ -28,7 +31,7 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
     <div className='flex flex-col gap-12'>
       <div
         className='flex flex-wrap items-start'
-        style={{ gap: generateClamp(0, 48, 1248, { safeMin: true }) }}
+        style={{ gap: generateClamp(0.1, 48, 1248) }}
       >
         <div
           className='mx-auto aspect-square h-auto flex-[3.1] shrink-0 basis-80'
@@ -116,12 +119,11 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
               >
                 Artwork
               </p>
-              <Image
+              <img
                 src={pokemon.sprites.front_default}
                 alt={pokemon.name}
                 width={80}
                 height={80}
-                sizes='100vw'
               />
             </div>
           </div>

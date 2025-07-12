@@ -1,5 +1,6 @@
-import formatStatName from '@/lib/formatStatName';
 import React from 'react';
+
+import formatStatName from '@/lib/formatStatName';
 
 type Stat = {
   base_stat: number;

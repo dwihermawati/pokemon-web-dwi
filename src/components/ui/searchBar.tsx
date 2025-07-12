@@ -1,11 +1,13 @@
 'use client';
 
+import { Icon } from '@iconify/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { Icon } from '@iconify/react';
+
 import { generateClamp } from '@/function/generate-clamp';
-import TypingPlaceholderInput from './typingPlaceholderInput';
 import { cn } from '@/lib/utils';
+
+import TypingPlaceholderInput from './typingPlaceholderInput';
 
 type SearchBarProps = {
   classname?: string;
@@ -46,7 +48,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ classname, style }) => {
   return (
     <div
       className={cn(
-        'flex-between focus-within:border-primary-300 w-full gap-1.5 rounded-full bg-neutral-100 focus-within:border md:w-129.5',
+        'flex-between focus-within:border-primary-300 w-full gap-1.5 rounded-full bg-neutral-100 py-2 focus-within:border md:w-129.5',
         classname
       )}
       style={{
@@ -78,7 +80,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ classname, style }) => {
           onClick={handleSubmit}
           aria-label='Submit search'
           className='bg-secondary-300 hover:bg-primary-300 flex-center aspect-square rounded-full text-white hover:text-black'
-          style={{ width: generateClamp(28, 40, 1248), height: 'auto' }}
+          style={{ height: generateClamp(28, 40, 1248), width: 'auto' }}
         >
           <Icon
             icon='uil:search'

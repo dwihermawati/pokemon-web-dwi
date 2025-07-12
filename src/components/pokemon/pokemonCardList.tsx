@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { cn } from '@/lib/utils';
-import { generateClamp } from '@/function/generate-clamp';
-import { PokemonDetail } from '@/types/pokemon';
-import PokemonCard from './pokemonCard';
 import { PacmanLoader } from 'react-spinners';
+
+import { generateClamp } from '@/function/generate-clamp';
+import { cn } from '@/lib/utils';
+import { PokemonDetail } from '@/types/pokemon';
+
+import PokemonCard from './pokemonCard';
 
 type PokemonCardListProps = {
   pokemons: PokemonDetail[];

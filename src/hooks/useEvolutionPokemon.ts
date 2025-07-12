@@ -1,4 +1,5 @@
 import { useQueries } from '@tanstack/react-query';
+
 import { getPokemonDetail } from '@/services/pokeApi';
 import { PokemonDetail } from '@/types/pokemon';
 

@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode, useState } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
+
 import store from '@/redux/store';
 
 const Providers = ({ children }: { children: ReactNode }) => {

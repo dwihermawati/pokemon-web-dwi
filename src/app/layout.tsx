@@ -2,8 +2,9 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Providers from './providers';
 import { ToastContainer } from 'react-toastify';
+
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'Pokedex',

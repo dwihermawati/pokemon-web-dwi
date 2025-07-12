@@ -1,4 +1,5 @@
 import { useInfiniteQuery, useQueries } from '@tanstack/react-query';
+
 import { getPokemonList, getPokemonDetailByUrl } from '@/services/pokeApi';
 import { PokemonDetail } from '@/types/pokemon';
 

@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { generateClamp } from '@/function/generate-clamp';
 import { generateClampInverse } from '@/function/generate-clamp-inverse';
-import React from 'react';
 
 const HeroBgDecorations = () => {
   return (
@@ -38,6 +39,7 @@ const HeroBgDecorations = () => {
             backgroundImage: "url('/images/pikachu-hero-decoration.png')",
             left: generateClamp(199, 1089, 1440),
             top: generateClamp(383, 391, 1440),
+            // bottom: generateClampInverse(-24, -27, 1440),
           }}
         />
       </div>

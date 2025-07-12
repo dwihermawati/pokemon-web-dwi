@@ -1,7 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { Icon } from '@iconify/react';
+import { useRouter } from 'next/navigation';
+
 import { cn } from '@/lib/utils';
 
 type ViewDetailButtonProps = {

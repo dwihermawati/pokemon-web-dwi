@@ -1,8 +1,10 @@
+import Image from 'next/image';
+import React, { Suspense } from 'react';
+
 import HeroBgDecorations from '@/components/hero/HeroBgDecorations';
 import SearchBar from '@/components/ui/searchBar';
+
 import { generateClamp } from '@/function/generate-clamp';
-import Image from 'next/image';
-import React from 'react';
 
 const Hero: React.FC = () => {
   return (
@@ -53,13 +55,15 @@ const Hero: React.FC = () => {
             Train, Battle, and Collect Your Favorites!
           </p>
         </div>
-        <SearchBar
-          classname='focus-within:border-secondary-300'
-          style={{
-            marginTop: generateClamp(15, 30, 1440),
-            maxWidth: generateClamp(361, 518, 1440),
-          }}
-        />
+        <Suspense fallback={null}>
+          <SearchBar
+            classname='focus-within:border-secondary-300'
+            style={{
+              marginTop: generateClamp(15, 30, 1440),
+              maxWidth: generateClamp(361, 518, 1440),
+            }}
+          />
+        </Suspense>
       </div>
     </section>
   );

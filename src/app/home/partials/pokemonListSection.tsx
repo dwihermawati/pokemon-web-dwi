@@ -1,11 +1,13 @@
 'use client';
 
+import React, { useEffect, useRef } from 'react';
+import { PacmanLoader } from 'react-spinners';
+
+import PokemonCardList from '@/components/pokemon/pokemonCardList';
+
 import { generateClamp } from '@/function/generate-clamp';
 import { generateClampInverse } from '@/function/generate-clamp-inverse';
 import { usePokemonList } from '@/hooks/usePokemonList';
-import { PacmanLoader } from 'react-spinners';
-import React, { useEffect, useRef } from 'react';
-import PokemonCardList from '@/components/pokemon/pokemonCardList';
 
 const PokemonListSection = () => {
   const {

@@ -1,8 +1,8 @@
-// components/pokemon/SizeDisplay.tsx
-import React from 'react';
 import { Icon } from '@iconify/react';
-import { formatHeight, formatWeight } from '@/lib/formatMeasurement';
+import React from 'react';
+
 import { generateClamp } from '@/function/generate-clamp';
+import { formatHeight, formatWeight } from '@/lib/formatMeasurement';
 
 type SizeDisplayProps = {
   height: number;

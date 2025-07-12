@@ -1,5 +1,6 @@
-import { capitalize } from '@/lib/formatStatName';
 import React from 'react';
+
+import { capitalize } from '@/lib/formatStatName';
 
 type BadgeProps = {
   label?: string;

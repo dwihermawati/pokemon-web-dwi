@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import favoritePokemonReducer from './features/favoritePokemonSlice';
 
 const store = configureStore({

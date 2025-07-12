@@ -1,14 +1,16 @@
-import { cn } from '@/lib/utils';
-import React, { useState } from 'react';
-import Badge from '../ui/badge';
-import { capitalize } from '@/lib/formatStatName';
-import { generateClamp } from '@/function/generate-clamp';
-import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
-import { DialogClose } from '@radix-ui/react-dialog';
+/* eslint-disable @next/next/no-img-element */
 import { XIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+
+import { generateClamp } from '@/function/generate-clamp';
+import { capitalize } from '@/lib/formatStatName';
+import { cn } from '@/lib/utils';
+
 import { FavoriteButton } from './favoritePokemonButton';
 import { ViewDetailButton } from './ViewDetailButton';
-import { useRouter } from 'next/navigation';
+import Badge from '../ui/badge';
+import { Dialog, DialogContent, DialogTitle, DialogClose } from '../ui/dialog';
 
 type PokemonCardProps = {
   pokeImage: string;
@@ -41,7 +43,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           variant === 'default'
             ? {
                 padding: generateClamp(12, 24, 1248),
-                gap: generateClamp(0, 24, 1248, { safeMin: true }),
+                gap: generateClamp(0.1, 24, 1248),
                 borderRadius: generateClamp(16, 24, 1248),
               }
             : { padding: '1rem', gap: '0.75rem', borderRadius: '1rem' }

@@ -1,18 +1,20 @@
 'use client';
 
-import { generateClamp } from '@/function/generate-clamp';
 import {
   motion,
   useMotionValueEvent,
   useScroll,
   useTransform,
 } from 'motion/react';
-import React, { useState } from 'react';
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import SearchBar from '../ui/searchBar';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import React, { Suspense, useState } from 'react';
+
+import { generateClamp } from '@/function/generate-clamp';
+import { cn } from '@/lib/utils';
+
+import SearchBar from '../ui/searchBar';
 
 type NavbarProps = {
   variant?: 'default' | 'secondary';
@@ -81,7 +83,11 @@ const Navbar: React.FC<NavbarProps> = ({ variant = 'default' }) => {
             Pokedex
           </span>
         </Link>
-        {variant === 'secondary' && <SearchBar />}
+        {variant === 'secondary' && (
+          <Suspense fallback={null}>
+            <SearchBar />
+          </Suspense>
+        )}
       </div>
     </motion.header>
   );

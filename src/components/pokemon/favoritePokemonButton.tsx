@@ -1,11 +1,12 @@
 'use client';
 
+import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Icon } from '@iconify/react';
 
 import { capitalize } from '@/lib/formatStatName';
+import { cn } from '@/lib/utils';
 import {
   addToFavorite,
   removeFromFavorite,
@@ -13,7 +14,6 @@ import {
 import { useAppDispatch } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
 import { PokemonCardData } from '@/types/pokemon';
-import { cn } from '@/lib/utils';
 
 type FavoriteButtonProps = {
   pokemon: PokemonCardData;

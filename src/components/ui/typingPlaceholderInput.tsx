@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const placeholders = ['Search Pokemon', 'Pikachu', 'Charizard', 'Bulbasaur'];
 
@@ -23,7 +23,7 @@ const TypingPlaceholderInput = ({
   const PAUSE_AFTER_TYPING = 1200;
   const PAUSE_AFTER_DELETING = 600;
 
-  const typeEffect = () => {
+  const typeEffect = useCallback(() => {
     const currentText = placeholders[indexRef.current];
     const charIndex = charIndexRef.current;
 
@@ -48,7 +48,7 @@ const TypingPlaceholderInput = ({
         typingTimeout.current = setTimeout(typeEffect, PAUSE_AFTER_DELETING);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (!isFocused && !props.value) {
@@ -58,7 +58,7 @@ const TypingPlaceholderInput = ({
     return () => {
       if (typingTimeout.current) clearTimeout(typingTimeout.current);
     };
-  }, [isFocused, props.value]);
+  }, [isFocused, props.value, typeEffect]);
 
   useEffect(() => {
     blinkInterval.current = setInterval(() => {
@@ -89,7 +89,7 @@ const TypingPlaceholderInput = ({
         {...props}
         className={
           className +
-          'text-sm-regular md:text-md-regular relative z-10 h-7 w-full bg-transparent text-neutral-900 outline-none md:h-7.5'
+          ' text-sm-regular md:text-md-regular relative z-10 h-7 w-full bg-transparent text-neutral-900 outline-none md:h-7.5'
         }
         onFocus={() => {
           setIsFocused(true);

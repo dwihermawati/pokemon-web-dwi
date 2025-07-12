@@ -1,15 +1,18 @@
 'use client';
 
-import Navbar from '@/components/common/Navbar';
-import React, { useEffect } from 'react';
-import DetailPokemonSection from './detailPokemon';
-import { useParams } from 'next/navigation';
-import { usePokemonDetail } from '@/hooks/usePokemonDetail';
-import { PacmanLoader } from 'react-spinners';
-import { generateClamp } from '@/function/generate-clamp';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import React, { useEffect } from 'react';
+import { PacmanLoader } from 'react-spinners';
+
 import Footer from '@/components/common/Footer';
+import Navbar from '@/components/common/Navbar';
+
+import { generateClamp } from '@/function/generate-clamp';
+import { usePokemonDetail } from '@/hooks/usePokemonDetail';
+
+import DetailPokemonSection from './detailPokemon';
 
 const DetailPokemon = () => {
   const params = useParams();
@@ -50,7 +53,7 @@ const DetailPokemon = () => {
             style={{
               marginTop: generateClamp(88, 128, 1248),
               marginBottom: generateClamp(40, 80, 1248),
-              gap: generateClamp(0, 24, 1248, { safeMin: true }),
+              gap: generateClamp(0, 24, 1248),
             }}
             className='custom-container flex flex-col'
           >

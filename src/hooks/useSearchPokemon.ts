@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { getPokemonDetail } from '@/services/pokeApi';
 
 export const useSearchPokemon = (name: string) => {
