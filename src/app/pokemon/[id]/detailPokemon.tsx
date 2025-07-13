@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { PacmanLoader } from 'react-spinners';
 
 import PokemonCardList from '@/components/pokemon/pokemonCardList';
@@ -11,6 +11,7 @@ import Badge from '@/components/ui/badge';
 import { generateClamp } from '@/function/generate-clamp';
 import useEvolutionPokemon from '@/hooks/useEvolutionPokemon';
 import { capitalize } from '@/lib/formatStatName';
+import { cn } from '@/lib/utils';
 import { PokemonDetail } from '@/types/pokemon';
 
 type DetailPokemonSectionProps = {
@@ -24,6 +25,8 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
   evolutionNames,
   description,
 }) => {
+  const [isMainImageLoaded, setIsMainImageLoaded] = useState(false);
+  const [isArtworkImageLoaded, setIsArtworkImageLoaded] = useState(false);
   const { data: evolutionCards, isLoading: isEvolutionLoading } =
     useEvolutionPokemon(evolutionNames);
 
@@ -34,13 +37,29 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
         style={{ gap: generateClamp(0.1, 48, 1248) }}
       >
         <div
-          className='mx-auto aspect-square h-auto flex-[3.1] shrink-0 basis-80'
+          className='relative mx-auto aspect-square h-auto flex-[3.1] shrink-0 basis-80'
           style={{ width: generateClamp(320, 479, 1248) }}
         >
+          {!isMainImageLoaded && (
+            <div className='flex-center absolute inset-0'>
+              <Image
+                src='/images/bg-pokemon-card.png'
+                alt='skeleton'
+                width={0}
+                height={0}
+                sizes='100vw'
+                className='size-full object-contain'
+              />
+            </div>
+          )}
           <img
             src={pokemon.sprites.other?.['official-artwork']?.front_default}
             alt={pokemon.name}
-            className='size-full object-contain'
+            className={cn(
+              'size-full object-contain transition-opacity duration-300',
+              isMainImageLoaded ? 'opacity-100' : 'opacity-0'
+            )}
+            onLoad={() => setIsMainImageLoaded(true)}
           />
         </div>
         <div
@@ -119,12 +138,28 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
               >
                 Artwork
               </p>
-              <img
-                src={pokemon.sprites.front_default}
-                alt={pokemon.name}
-                width={80}
-                height={80}
-              />
+              <div className='relative size-20'>
+                {!isArtworkImageLoaded && (
+                  <Image
+                    src='/images/bg-pokemon-card.png'
+                    alt='skeleton'
+                    width={80}
+                    height={80}
+                    className='object-contain'
+                  />
+                )}
+                <img
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  className={cn(
+                    'absolute inset-0 object-contain',
+                    isArtworkImageLoaded ? 'opacity-100' : 'opacity-0'
+                  )}
+                  width={80}
+                  height={80}
+                  onLoad={() => setIsArtworkImageLoaded(true)}
+                />
+              </div>
             </div>
           </div>
           <StatsSection key={pokemon.id} stats={pokemon.stats} />

@@ -15,10 +15,12 @@ export const usePokemonDetail = (name: string) => {
     staleTime: 1000 * 60 * 5,
   });
 
+  const speciesName = detailQuery.data?.species?.name;
+
   const speciesQuery = useQuery({
-    queryKey: ['pokemon-species', name],
-    queryFn: () => getPokemonSpecies(name),
-    enabled: !!name,
+    queryKey: ['pokemon-species', speciesName],
+    queryFn: () => getPokemonSpecies(speciesName!),
+    enabled: !!speciesName,
     staleTime: 1000 * 60 * 10,
   });
 
@@ -38,21 +40,30 @@ export const usePokemonDetail = (name: string) => {
   });
 
   useEffect(() => {
-    if (evolutionQuery.data) {
+    if (evolutionQuery.data && speciesQuery.data) {
       const chain = evolutionQuery.data.chain;
-      const names: string[] = [];
+      const speciesNames: string[] = [];
 
-      names.push(chain.species.name);
+      speciesNames.push(chain.species.name);
       if (chain.evolves_to.length) {
-        names.push(chain.evolves_to[0].species.name);
+        speciesNames.push(chain.evolves_to[0].species.name);
         if (chain.evolves_to[0].evolves_to.length) {
-          names.push(chain.evolves_to[0].evolves_to[0].species.name);
+          speciesNames.push(chain.evolves_to[0].evolves_to[0].species.name);
         }
       }
 
-      setEvolutionNames(names);
+      const allVarieties = speciesQuery.data.varieties;
+      const validPokemonNames = speciesNames.map((speciesName) => {
+        const match = allVarieties.find((v) =>
+          v.pokemon.name.includes(speciesName)
+        );
+        return match?.pokemon.name ?? speciesName;
+      });
+
+      const uniqueNames = Array.from(new Set(validPokemonNames));
+      setEvolutionNames(uniqueNames);
     }
-  }, [evolutionQuery.data]);
+  }, [evolutionQuery.data, speciesQuery.data]);
 
   const description =
     speciesQuery.data?.flavor_text_entries

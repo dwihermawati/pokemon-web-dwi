@@ -16,15 +16,24 @@ const SearchResultPokemon = () => {
   const query = searchParams.get('query') ?? '';
   const { data, isLoading, isError } = useSearchPokemon(query);
 
+  if (isLoading) {
+    return (
+      <>
+        <div className='flex-center min-h-screen -translate-x-15'>
+          <PacmanLoader size={50} color='#ffcb05' />
+        </div>
+        <Footer classname='w-full fixed bottom-0 left-0' />
+      </>
+    );
+  }
+
   return (
     <>
       <main
         className='custom-container'
         style={{ marginTop: generateClamp(80, 140, 1248) }}
       >
-        {isLoading ? (
-          <PacmanLoader size={50} color='#ffcb05' />
-        ) : isError || !data ? (
+        {isError || !data ? (
           <>
             <p
               className='font-bold text-neutral-900'
@@ -91,6 +100,7 @@ const SearchResultPokemon = () => {
                 }
                 pokeType={data.types.map((t) => t.type.name)}
                 variant='default'
+                className='sm:w-[288px]'
               />
             </div>
           </div>

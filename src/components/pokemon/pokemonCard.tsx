@@ -18,6 +18,7 @@ type PokemonCardProps = {
   pokeName: string;
   pokeType?: string[];
   variant?: 'default' | 'evolution';
+  className?: string;
 };
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
@@ -26,6 +27,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   pokeName,
   pokeType,
   variant = 'default',
+  className,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const router = useRouter();
@@ -37,7 +39,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
     <>
       <div
         className={cn(
-          'bg-neutral-25 relative flex flex-col border border-neutral-300 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:scale-[1.01] hover:drop-shadow'
+          'bg-neutral-25 relative flex flex-col border border-neutral-300 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:scale-[1.01] hover:drop-shadow',
+          className
         )}
         style={
           variant === 'default'
@@ -96,10 +99,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
 
         {/* Card Content */}
         {variant === 'default' ? (
-          <div
-            className='group flex cursor-pointer flex-col gap-4'
-            onClick={handleClick}
-          >
+          <div className='mr-11 flex flex-col gap-4' onClick={handleClick}>
             <div>
               <p
                 className='font-regular text-neutral-500'
@@ -111,7 +111,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
                 {pokeId.toString().padStart(3, '0')}
               </p>
               <p
-                className='group-hover:text-primary-400 font-semibold text-neutral-900 transition-all duration-300 ease-in-out'
+                className='hover:text-primary-400 cursor-pointer font-semibold text-neutral-900 transition-all duration-300 ease-in-out'
                 style={{
                   fontSize: generateClamp(16, 20, 1248),
                   lineHeight: generateClamp(30, 34, 1248),

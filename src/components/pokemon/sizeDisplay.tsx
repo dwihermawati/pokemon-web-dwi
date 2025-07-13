@@ -22,8 +22,8 @@ const SizeDisplay: React.FC<SizeDisplayProps> = ({ height, weight }) => {
       >
         Size
       </p>
-      <div className='flex gap-12'>
-        <div className='flex w-20 flex-col gap-1'>
+      <div className='flex flex-wrap gap-12'>
+        <div className='flex max-w-30 flex-col gap-1'>
           <div className='flex'>
             <Icon
               icon='material-symbols:weight-outline'

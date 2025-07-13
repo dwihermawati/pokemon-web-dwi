@@ -50,6 +50,10 @@ export type PokemonDetail = {
   weight: number;
   height: number;
   stats: DetailStatPokemon[];
+  species: {
+    name: string;
+    url: string;
+  };
 };
 
 export type PokemonSpecies = {
@@ -62,6 +66,13 @@ export type PokemonSpecies = {
   evolution_chain: {
     url: string;
   };
+  varieties: {
+    is_default: boolean;
+    pokemon: {
+      name: string;
+      url: string;
+    };
+  }[];
 };
 
 export type EvolutionChain = {

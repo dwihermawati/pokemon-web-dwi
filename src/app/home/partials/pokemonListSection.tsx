@@ -16,6 +16,7 @@ const PokemonListSection = () => {
     hasNextPage,
     isLoading,
     isLoadingDetails,
+    resetPagination,
   } = usePokemonList();
 
   const previousCountRef = useRef(0);
@@ -48,7 +49,7 @@ const PokemonListSection = () => {
       }}
     >
       {isLoading || isInitialDetailEmpty ? (
-        <div className='flex-center min-h-screen'>
+        <div className='flex-center min-h-screen -translate-x-15'>
           <PacmanLoader size={50} color='#ffcb05' />
         </div>
       ) : (
@@ -60,6 +61,7 @@ const PokemonListSection = () => {
           hasNextPage={hasNextPage}
           onLoadMore={handleLoadMore}
           isLoadingMore={isLoadingMore}
+          onResetPagination={resetPagination}
         />
       )}
     </main>

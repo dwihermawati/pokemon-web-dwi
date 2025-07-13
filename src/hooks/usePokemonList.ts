@@ -1,9 +1,14 @@
-import { useInfiniteQuery, useQueries } from '@tanstack/react-query';
+import {
+  useInfiniteQuery,
+  useQueries,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { getPokemonList, getPokemonDetailByUrl } from '@/services/pokeApi';
 import { PokemonDetail } from '@/types/pokemon';
 
 export const usePokemonList = () => {
+  const queryClient = useQueryClient();
   // Main query for pagination list (name + url)
   const listQuery = useInfiniteQuery({
     queryKey: ['pokemon-list'],
@@ -35,9 +40,14 @@ export const usePokemonList = () => {
     .filter((q) => q.data)
     .map((q) => q.data as PokemonDetail);
 
+  const resetPagination = () => {
+    queryClient.removeQueries({ queryKey: ['pokemon-list'] });
+  };
+
   return {
     ...listQuery,
     pokemonDetails,
     isLoadingDetails: detailQueries.some((q) => q.isLoading),
+    resetPagination,
   };
 };

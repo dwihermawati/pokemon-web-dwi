@@ -18,6 +18,7 @@ type PokemonCardListProps = {
   onLoadMore?: () => void;
   hasNextPage?: boolean;
   isLoadingMore?: boolean;
+  onResetPagination?: () => void;
 };
 
 const PokemonCardList: React.FC<PokemonCardListProps> = ({
@@ -29,6 +30,7 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
   onLoadMore,
   hasNextPage,
   isLoadingMore,
+  onResetPagination,
 }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
@@ -61,7 +63,7 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
       >
         {pokemons.map((pokemon) => (
           <PokemonCard
-            key={pokemon.id}
+            key={pokemon.name}
             pokeId={pokemon.id}
             pokeName={pokemon.name}
             pokeImage={
@@ -76,7 +78,9 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
       {withLoadMoreButton && (
         <div ref={loadMoreRef} className='mt-6 flex justify-center'>
           {isLoadingMore ? (
-            <PacmanLoader size={30} color='#ffcb05' />
+            <div className='-translate-x-15'>
+              <PacmanLoader size={30} color='#ffcb05' />
+            </div>
           ) : hasNextPage ? (
             <button
               type='button'
@@ -90,7 +94,20 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
               Load More
             </button>
           ) : (
-            <p className='mt-4 text-sm text-neutral-500'>No more Pokémon</p>
+            <>
+              <p className='mt-4 text-sm text-neutral-500'>No more Pokémon</p>
+              <button
+                type='button'
+                onClick={onResetPagination}
+                className='text-sm-semibold md:text-md-semibold hover:bg-accent-yellow mx-auto cursor-pointer rounded-full border border-neutral-300 py-2 text-neutral-900 transition-all duration-300 ease-in-out hover:scale-103 hover:drop-shadow max-md:px-2'
+                style={{
+                  width: generateClamp(180, 237, 1248),
+                  height: generateClamp(44, 52, 1248),
+                }}
+              >
+                Load Less
+              </button>
+            </>
           )}
         </div>
       )}
@@ -99,3 +116,5 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
 };
 
 export default PokemonCardList;
+
+// dudunsparce-two-segment
