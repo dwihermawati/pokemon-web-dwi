@@ -40,8 +40,13 @@ export const usePokemonList = () => {
     .filter((q) => q.data)
     .map((q) => q.data as PokemonDetail);
 
-  const resetPagination = () => {
-    queryClient.removeQueries({ queryKey: ['pokemon-list'] });
+  const resetPagination = async () => {
+    await queryClient.removeQueries({ queryKey: ['pokemon-list'] });
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: ['pokemon-list'],
+      queryFn: ({ pageParam = 0 }) => getPokemonList(pageParam, 24),
+      initialPageParam: 0,
+    });
   };
 
   return {

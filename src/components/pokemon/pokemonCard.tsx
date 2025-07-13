@@ -30,6 +30,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   className,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isMainImageLoaded, setIsMainImageLoaded] = useState(false);
   const router = useRouter();
 
   const handleClick = () => {
@@ -142,11 +143,27 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
               <XIcon className='text-accent-yellow size-9 cursor-pointer opacity-100 transition-opacity hover:opacity-70 max-md:size-8' />
             </DialogClose>
           </div>
-          <img
-            src={pokeImage}
-            alt={pokeName}
-            className='mx-auto aspect-square h-full object-contain'
-          />
+
+          <div className='relative mx-auto aspect-square h-full w-full max-w-[300px]'>
+            {!isMainImageLoaded && (
+              <div className='flex-center absolute inset-0 pb-3'>
+                <img
+                  src='/images/bg-pokemon-card.png'
+                  alt='skeleton'
+                  className='size-full object-contain opacity-30'
+                />
+              </div>
+            )}
+            <img
+              src={pokeImage}
+              alt={pokeName}
+              className={cn(
+                'size-full object-contain transition-opacity duration-300',
+                isMainImageLoaded ? 'opacity-100' : 'opacity-0'
+              )}
+              onLoad={() => setIsMainImageLoaded(true)}
+            />
+          </div>
         </DialogContent>
       </Dialog>
     </>

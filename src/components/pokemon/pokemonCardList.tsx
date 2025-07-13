@@ -94,7 +94,7 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
               Load More
             </button>
           ) : (
-            <>
+            <div className='flex-center flex-col gap-3'>
               <p className='mt-4 text-sm text-neutral-500'>No more Pokémon</p>
               <button
                 type='button'
@@ -107,7 +107,7 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
               >
                 Load Less
               </button>
-            </>
+            </div>
           )}
         </div>
       )}
@@ -116,5 +116,3 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
 };
 
 export default PokemonCardList;
-
-// dudunsparce-two-segment
