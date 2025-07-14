@@ -42,6 +42,8 @@ export const usePokemonList = () => {
 
   const resetPagination = async () => {
     await queryClient.removeQueries({ queryKey: ['pokemon-list'] });
+    await queryClient.removeQueries({ queryKey: ['pokemon-detail'] });
+
     await queryClient.prefetchInfiniteQuery({
       queryKey: ['pokemon-list'],
       queryFn: ({ pageParam = 0 }) => getPokemonList(pageParam, 24),

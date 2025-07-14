@@ -21,6 +21,7 @@ const PokemonListSection = () => {
 
   const previousCountRef = useRef(0);
   const [isUserLoadingMore, setIsUserLoadingMore] = React.useState(false);
+  const [isResetting, setIsResetting] = React.useState(false);
 
   const isLoadingMore =
     isUserLoadingMore &&
@@ -29,15 +30,23 @@ const PokemonListSection = () => {
   const isInitialDetailEmpty = !isLoading && pokemonDetails.length === 0;
 
   useEffect(() => {
-    if (pokemonDetails.length > previousCountRef.current) {
+    if (pokemonDetails.length > previousCountRef.current && !isLoadingDetails) {
       setIsUserLoadingMore(false);
       previousCountRef.current = pokemonDetails.length;
     }
-  }, [pokemonDetails.length]);
+  }, [pokemonDetails.length, isLoadingDetails]);
 
   const handleLoadMore = () => {
     setIsUserLoadingMore(true);
     fetchNextPage();
+  };
+
+  const handleResetPagination = async () => {
+    setIsResetting(true);
+    await resetPagination();
+    await new Promise((res) => setTimeout(res, 300));
+    setIsResetting(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -61,7 +70,8 @@ const PokemonListSection = () => {
           hasNextPage={hasNextPage}
           onLoadMore={handleLoadMore}
           isLoadingMore={isLoadingMore}
-          onResetPagination={resetPagination}
+          onResetPagination={handleResetPagination}
+          isResetting={isResetting}
         />
       )}
     </main>

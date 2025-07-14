@@ -19,6 +19,7 @@ type PokemonCardListProps = {
   hasNextPage?: boolean;
   isLoadingMore?: boolean;
   onResetPagination?: () => void;
+  isResetting?: boolean;
 };
 
 const PokemonCardList: React.FC<PokemonCardListProps> = ({
@@ -31,6 +32,7 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
   hasNextPage,
   isLoadingMore,
   onResetPagination,
+  isResetting,
 }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,7 +57,8 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
       )}
       <div
         className={cn(
-          'grid gap-4',
+          'grid gap-4 transition-opacity duration-500',
+          isResetting ? 'pointer-events-none opacity-50' : 'opacity-100',
           variant === 'default'
             ? 'grid-cols-[repeat(auto-fit,minmax(288px,1fr))]'
             : 'sc670:grid-cols-[repeat(auto-fill,minmax(192px,192px))] grid-cols-1 md:gap-5'
@@ -85,7 +88,13 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
             <button
               type='button'
               onClick={onLoadMore}
-              className='text-sm-semibold md:text-md-semibold hover:bg-accent-yellow mx-auto mt-6 cursor-pointer rounded-full border border-neutral-300 py-2 text-neutral-900 transition-all duration-300 ease-in-out hover:scale-103 hover:drop-shadow max-md:px-2'
+              disabled={isLoadingMore}
+              className={cn(
+                'text-sm-semibold md:text-md-semibold mx-auto mt-6 cursor-pointer rounded-full border border-neutral-300 py-2 text-neutral-900 transition-all duration-300 ease-in-out max-md:px-2',
+                isLoadingMore
+                  ? 'cursor-not-allowed opacity-50'
+                  : 'hover:bg-accent-yellow hover:scale-103 hover:drop-shadow'
+              )}
               style={{
                 width: generateClamp(180, 237, 1248),
                 height: generateClamp(44, 52, 1248),
@@ -93,22 +102,27 @@ const PokemonCardList: React.FC<PokemonCardListProps> = ({
             >
               Load More
             </button>
-          ) : (
+          ) : !isLoadingMore ? (
             <div className='flex-center flex-col gap-3'>
               <p className='mt-4 text-sm text-neutral-500'>No more Pokémon</p>
               <button
                 type='button'
                 onClick={onResetPagination}
+                disabled={isResetting}
                 className='text-sm-semibold md:text-md-semibold hover:bg-accent-yellow mx-auto cursor-pointer rounded-full border border-neutral-300 py-2 text-neutral-900 transition-all duration-300 ease-in-out hover:scale-103 hover:drop-shadow max-md:px-2'
                 style={{
                   width: generateClamp(180, 237, 1248),
                   height: generateClamp(44, 52, 1248),
                 }}
               >
-                Load Less
+                {isResetting ? (
+                  <PacmanLoader size={16} color='#ffcb05' />
+                ) : (
+                  'Load Less'
+                )}
               </button>
             </div>
-          )}
+          ) : null}
         </div>
       )}
     </div>

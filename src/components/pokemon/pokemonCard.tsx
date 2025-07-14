@@ -58,7 +58,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           className={cn(
             'absolute right-5 bottom-5 z-10 flex gap-3',
             variant === 'evolution'
-              ? 'max-sc670:flex-col sc670:right-3 sc670:bottom-13 flex'
+              ? 'max-sc670:flex-col sc670:right-3 sc670:bottom-13 sc670:hidden flex'
               : 'flex-col'
           )}
         >
@@ -100,7 +100,10 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
 
         {/* Card Content */}
         {variant === 'default' ? (
-          <div className='mr-11 flex flex-col gap-4' onClick={handleClick}>
+          <div
+            className='group mr-11 flex cursor-pointer flex-col gap-4'
+            onClick={handleClick}
+          >
             <div>
               <p
                 className='font-regular text-neutral-500'
@@ -112,7 +115,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
                 {pokeId.toString().padStart(3, '0')}
               </p>
               <p
-                className='hover:text-primary-400 cursor-pointer font-semibold text-neutral-900 transition-all duration-300 ease-in-out'
+                className='group-hover:text-primary-400 cursor-pointer font-semibold text-neutral-900 transition-all duration-300 ease-in-out'
                 style={{
                   fontSize: generateClamp(16, 20, 1248),
                   lineHeight: generateClamp(30, 34, 1248),
@@ -124,13 +127,29 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             {pokeType && <Badge badge={pokeType} />}
           </div>
         ) : (
-          <div onClick={handleClick}>
+          <div onClick={handleClick} className='relative'>
             <p className='text-md-regular text-neutral-500'>
               {pokeId.toString().padStart(3, '0')}
             </p>
             <p className='text-xl-semibold hover:text-primary-400 cursor-pointer text-neutral-900 transition-all duration-300 ease-in-out'>
               {capitalize(pokeName)}
             </p>
+            <div className='max-sc670:hidden sc670:right-0 sc670:top-0 sc670:gap-3 absolute flex'>
+              <FavoriteButton
+                pokemon={{
+                  id: pokeId,
+                  name: pokeName,
+                  image: pokeImage,
+                  types:
+                    pokeType?.map((type) => ({ type: { name: type } })) || [],
+                }}
+                className={cn(variant === 'evolution' && 'sc670:size-7')}
+              />
+              <ViewDetailButton
+                name={pokeName}
+                className={cn(variant === 'evolution' && 'sc670:size-7')}
+              />
+            </div>
           </div>
         )}
       </div>
@@ -144,26 +163,24 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             </DialogClose>
           </div>
 
-          <div className='relative mx-auto aspect-square h-full w-full max-w-[300px]'>
-            {!isMainImageLoaded && (
-              <div className='flex-center absolute inset-0 pb-3'>
-                <img
-                  src='/images/bg-pokemon-card.png'
-                  alt='skeleton'
-                  className='size-full object-contain opacity-30'
-                />
-              </div>
+          {!isMainImageLoaded && (
+            <div className='pt-4'>
+              <img
+                src='/images/bg-pokemon-card.png'
+                alt='skeleton'
+                className='mx-auto h-full object-contain opacity-30'
+              />
+            </div>
+          )}
+          <img
+            src={pokeImage}
+            alt={pokeName}
+            className={cn(
+              'mx-auto aspect-square h-full object-contain transition-opacity duration-300',
+              isMainImageLoaded ? 'opacity-100' : 'opacity-0'
             )}
-            <img
-              src={pokeImage}
-              alt={pokeName}
-              className={cn(
-                'size-full object-contain transition-opacity duration-300',
-                isMainImageLoaded ? 'opacity-100' : 'opacity-0'
-              )}
-              onLoad={() => setIsMainImageLoaded(true)}
-            />
-          </div>
+            onLoad={() => setIsMainImageLoaded(true)}
+          />
         </DialogContent>
       </Dialog>
     </>
