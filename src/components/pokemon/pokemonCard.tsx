@@ -90,12 +90,16 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             backgroundPosition: 'center',
           }}
         >
-          <img
-            src={pokeImage}
-            alt={pokeName}
-            className='size-full cursor-pointer object-contain hover:scale-103 hover:brightness-105 active:scale-95'
-            onClick={() => setDialogOpen(true)}
-          />
+          {pokeImage ? (
+            <img
+              src={pokeImage}
+              alt={pokeName}
+              className='size-full cursor-pointer object-contain hover:scale-103 hover:brightness-105 active:scale-95'
+              onClick={() => setDialogOpen(true)}
+            />
+          ) : (
+            <p>Image not available</p>
+          )}
         </div>
 
         {/* Card Content */}
@@ -127,7 +131,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             {pokeType && <Badge badge={pokeType} />}
           </div>
         ) : (
-          <div onClick={handleClick} className='relative'>
+          <div onClick={handleClick} className='max-sc670:mr-11 relative'>
             <p className='text-md-regular text-neutral-500'>
               {pokeId.toString().padStart(3, '0')}
             </p>
@@ -156,31 +160,30 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
-          <div className='flex-between'>
+          <div className='flex-between pb-4'>
             <DialogTitle>{capitalize(pokeName)}</DialogTitle>
             <DialogClose>
               <XIcon className='text-accent-yellow size-9 cursor-pointer opacity-100 transition-opacity hover:opacity-70 max-md:size-8' />
             </DialogClose>
           </div>
-
-          {!isMainImageLoaded && (
-            <div className='pt-4'>
+          <div className='flex-center relative aspect-square max-h-125 w-full'>
+            {!isMainImageLoaded && (
               <img
                 src='/images/bg-pokemon-card.png'
                 alt='skeleton'
-                className='mx-auto h-full object-contain opacity-30'
+                className='absolute inset-0 mx-auto size-full object-contain opacity-30'
               />
-            </div>
-          )}
-          <img
-            src={pokeImage}
-            alt={pokeName}
-            className={cn(
-              'mx-auto aspect-square h-full object-contain transition-opacity duration-300',
-              isMainImageLoaded ? 'opacity-100' : 'opacity-0'
             )}
-            onLoad={() => setIsMainImageLoaded(true)}
-          />
+            <img
+              src={pokeImage}
+              alt={pokeName}
+              className={cn(
+                'mx-auto size-full object-contain transition-opacity duration-300',
+                isMainImageLoaded ? 'opacity-100' : 'opacity-0'
+              )}
+              onLoad={() => setIsMainImageLoaded(true)}
+            />
+          </div>
         </DialogContent>
       </Dialog>
     </>

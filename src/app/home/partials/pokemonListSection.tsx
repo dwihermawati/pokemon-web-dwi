@@ -44,7 +44,7 @@ const PokemonListSection = () => {
   const handleResetPagination = async () => {
     setIsResetting(true);
     await resetPagination();
-    await new Promise((res) => setTimeout(res, 300));
+    // await new Promise((res) => setTimeout(res, 300));
     setIsResetting(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

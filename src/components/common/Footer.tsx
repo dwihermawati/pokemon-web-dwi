@@ -54,7 +54,17 @@ const Footer: React.FC<FooterProps> = ({ classname }) => {
             lineHeight: generateClamp(24, 30, 1248),
           }}
         >
-          Copyright by Dwi Hermawati ©2025 Pokedex
+          Copyright by{' '}
+          <a
+            href='https://dwi-hermawati.vercel.app/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-[#0093dd] underline underline-offset-3 hover:brightness-130'
+            title='dwi-hermawati.vercel.app'
+          >
+            Dwi Hermawati
+          </a>{' '}
+          ©2025 Pokedex
         </p>
       </div>
     </footer>

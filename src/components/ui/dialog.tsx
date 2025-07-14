@@ -62,7 +62,7 @@ function DialogContent({
         )}
         {...props}
       >
-        <div className='relative size-full rounded-xl border border-neutral-600 bg-transparent p-4 pb-8 shadow-2xl md:rounded-2xl'>
+        <div className='relative size-full rounded-xl border border-neutral-600 bg-transparent p-4 shadow-2xl md:rounded-2xl md:p-6'>
           {children}
         </div>
       </DialogPrimitive.Content>

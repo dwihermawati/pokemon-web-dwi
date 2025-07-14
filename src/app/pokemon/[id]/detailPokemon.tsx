@@ -52,15 +52,21 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
               />
             </div>
           )}
-          <img
-            src={pokemon.sprites.other?.['official-artwork']?.front_default}
-            alt={pokemon.name}
-            className={cn(
-              'size-full object-contain transition-opacity duration-300',
-              isMainImageLoaded ? 'opacity-100' : 'opacity-0'
-            )}
-            onLoad={() => setIsMainImageLoaded(true)}
-          />
+          {pokemon.sprites.other?.['official-artwork']?.front_default ? (
+            <img
+              src={pokemon.sprites.other?.['official-artwork']?.front_default}
+              alt={pokemon.name}
+              className={cn(
+                'size-full object-contain transition-opacity duration-300',
+                isMainImageLoaded ? 'opacity-100' : 'opacity-0'
+              )}
+              onLoad={() => setIsMainImageLoaded(true)}
+            />
+          ) : (
+            <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
+              Image not available
+            </p>
+          )}
         </div>
         <div
           className='flex flex-[6.9] basis-80 flex-col'
@@ -148,17 +154,23 @@ const DetailPokemonSection: React.FC<DetailPokemonSectionProps> = ({
                     className='object-contain'
                   />
                 )}
-                <img
-                  src={pokemon.sprites.front_default}
-                  alt={pokemon.name}
-                  className={cn(
-                    'absolute inset-0 object-contain',
-                    isArtworkImageLoaded ? 'opacity-100' : 'opacity-0'
-                  )}
-                  width={80}
-                  height={80}
-                  onLoad={() => setIsArtworkImageLoaded(true)}
-                />
+                {pokemon.sprites.front_default ? (
+                  <img
+                    src={pokemon.sprites.front_default}
+                    alt={pokemon.name}
+                    className={cn(
+                      'absolute inset-0 object-contain',
+                      isArtworkImageLoaded ? 'opacity-100' : 'opacity-0'
+                    )}
+                    width={80}
+                    height={80}
+                    onLoad={() => setIsArtworkImageLoaded(true)}
+                  />
+                ) : (
+                  <p className='text-xs-regular absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-center'>
+                    Image not available
+                  </p>
+                )}
               </div>
             </div>
           </div>
